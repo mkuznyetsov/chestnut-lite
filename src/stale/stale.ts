@@ -48,13 +48,13 @@ export class Stale {
 
     // get all issues not updated since this date and that are not in frozen state
     const options = this.githubRead.search.issuesAndPullRequests.endpoint.merge({
-      q: `repo:eclipse/che state:open updated:<=${simpleDate} -label:lifecycle/frozen`,
+      q: `repo:eclipse-che/che state:open updated:<=${simpleDate} -label:lifecycle/frozen`,
       sort: 'created',
       order: 'asc',
       per_page: 100,
     });
 
-    //this.logger.debug('Request is' + `GET /search/issues?q=repo%3Aeclipse%2Fche+is:issue+updated%3A%3C%3D${simpleDate}+-label%3Alifecycle%2Ffrozen+state:open&sort=created&order=asc`);
+    //this.logger.debug('Request is' + `GET /search/issues?q=repo%3Aeclipse-che%2Fche+is:issue+updated%3A%3C%3D${simpleDate}+-label%3Alifecycle%2Ffrozen+state:open&sort=created&order=asc`);
     const response = await this.githubRead.paginate(options);
     this.handleStaleIssues(response, beforeDate);
 
