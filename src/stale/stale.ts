@@ -69,13 +69,13 @@ export class Stale {
 
     // get all issues not updated since this date and that are not in frozen state
     const searchOptions = this.githubRead.search.issuesAndPullRequests.endpoint.merge({
-      q: `repo:eclipse/che state:open updated:<=${inThePasteDateSimple} label:lifecycle/stale`,
+      q: `repo:eclipse-che/che state:open updated:<=${inThePasteDateSimple} label:lifecycle/stale`,
       sort: 'created',
       order: 'asc',
       per_page: 100,
     });
 
-    //this.logger.debug('Request is' + `GET /search/issues?q=repo%3Aeclipse%2Fche+is:issue+updated%3A%3C%3D${simpleDate}+-label%3Alifecycle%2Ffrozen+state:open&sort=created&order=asc`);
+    //this.logger.debug('Request is' + `GET /search/issues?q=repo%3Aeclipse-che%2Fche+is:issue+updated%3A%3C%3D${simpleDate}+-label%3Alifecycle%2Ffrozen+state:open&sort=created&order=asc`);
     const staleResponse = await this.githubRead.paginate(searchOptions);
     this.handleClosingStaleIssues(staleResponse);
 
@@ -97,7 +97,7 @@ export class Stale {
 
     issuesInfos.forEach(issueInfo => {
       // flag
-      const actions = new Actions(this.githubPush, 'eclipse', 'che', issueInfo.number());
+      const actions = new Actions(this.githubPush, 'eclipse-che', 'che', issueInfo.number());
       this.flagIssueHandlers.forEach((handler: IssueHandler) => handler.execute(issueInfo, actions));
     });
 
@@ -119,7 +119,7 @@ export class Stale {
 
     issuesInfos.forEach(issueInfo => {
       // flag
-      const actions = new Actions(this.githubPush, 'eclipse', 'che', issueInfo.number());
+      const actions = new Actions(this.githubPush, 'eclipse-che', 'che', issueInfo.number());
       this.closeStaleIssueHandlers.forEach((handler: IssueHandler) => handler.execute(issueInfo, actions));
     });
 
