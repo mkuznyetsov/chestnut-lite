@@ -69,7 +69,7 @@ export class Stale {
 
     // get all issues not updated since this date and that are not in frozen state
     const searchOptions = this.githubRead.search.issuesAndPullRequests.endpoint.merge({
-      q: `repo:eclipse/che state:open updated:<=${inThePasteDateSimple} label:lifecycle/stale`,
+      q: `repo:eclipse-che/che state:open updated:<=${inThePasteDateSimple} label:lifecycle/stale`,
       sort: 'created',
       order: 'asc',
       per_page: 100,
